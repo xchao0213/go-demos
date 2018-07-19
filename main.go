@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	cors "github.com/xchao0213/go-demos/cors"
 )
 
 func main() {
@@ -12,6 +13,7 @@ func main() {
 	// Set a lower memory limit for multipart forms (default is 32 MiB)
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	router.Static("/", "./public")
+	router.Use(cors.Default())
 	router.POST("/upload", func(c *gin.Context) {
 		name := c.PostForm("name")
 		email := c.PostForm("email")
