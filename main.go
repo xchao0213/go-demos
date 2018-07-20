@@ -12,7 +12,7 @@ func main() {
 	router := gin.Default()
 	// Set a lower memory limit for multipart forms (default is 32 MiB)
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
-	router.Static("/", "./public")
+	router.Static("/home", "./public")
 	router.Use(cors.Default())
 	router.POST("/upload", func(c *gin.Context) {
 		name := c.PostForm("name")
@@ -32,6 +32,10 @@ func main() {
 
 		c.JSON(http.StatusOK, getjson(file.Filename,name,email))
 	})
+    router.GET("/get", func(c *gin.Context) {
+		c.JSON(http.StatusOK, getjson("Teid.png","alpha","alpha@gmail.com"))
+	})
+
 	router.Run(":8080")
 }
 
