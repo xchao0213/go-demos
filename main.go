@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	cors "github.com/xchao0213/go-demos/cors"
+	"github.com/gin-contrib/cors"
 )
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
 		c.JSON(http.StatusOK, getjson("Teid.png","alpha","alpha@gmail.com"))
 	})
 
-	router.Run(":8080")
+	router.Run(":9090")
 }
 
 func getjson(filename,name,email string) gin.H {
