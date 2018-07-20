@@ -25,12 +25,12 @@ func main() {
 			return
 		}
 
-		if err := c.SaveUploadedFile(file, file.Filename); err != nil {
+		if err := c.SaveUploadedFile(file, "public/" + file.Filename); err != nil {
 			c.String(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
 			return
 		}
 
-		c.String(http.StatusOK, fmt.Sprintf("File %s uploaded successfully with fields name=%s and email=%s.", file.Filename, name, email))
+		c.JSON(http.StatusOK, "http://47.98.193.29:9090/"+file.Filename, name, email))
 	})
-	router.Run(":8080")
+	router.Run(":9090")
 }
