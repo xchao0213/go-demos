@@ -25,12 +25,16 @@ func main() {
 			return
 		}
 
-		if err := c.SaveUploadedFile(file, "public/" + file.Filename); err != nil {
+		if err := c.SaveUploadedFile(file, file.Filename); err != nil {
 			c.String(http.StatusBadRequest, fmt.Sprintf("upload file err: %s", err.Error()))
 			return
 		}
 
-		c.JSON(http.StatusOK, "http://47.98.193.29:9090/"+file.Filename, name, email))
+		c.JSON(http.StatusOK, getjson(file.Filename,name,email))
 	})
-	router.Run(":9090")
+	router.Run(":8080")
+}
+
+func getjson(filename,name,email string) gin.H {
+	return gin.H{"ImgUrl":filename,"name":name,"email":email}
 }
