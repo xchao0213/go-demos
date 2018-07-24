@@ -1,12 +1,14 @@
 package main
 
 import (
+	"fmt"
 	// "fmt"
 	// "net/http"
 
 	// "github.com/gin-gonic/gin"
 	// "github.com/gin-contrib/cors"
 	"github.com/xchao0213/go-demos/server"
+	"github.com/xchao0213/go-demos/common"
 )
 
 func main() {
@@ -17,6 +19,9 @@ func main() {
 	// r.Use(cors.Default())
 
 	r := server.SetupRouter()
+
+	var ds = common.GetDataSource()
+	fmt.Println(ds)
 	// router.POST("/user", func(c *gin.Context) {
 	// 	name := c.PostForm("name")
 	// 	email := c.PostForm("email")
