@@ -1,5 +1,36 @@
 package model
 
+import "fmt"
+
+
+const tblUsers = "users"
+
+type User struct {
+	Id           string `db:"id"`
+	Name         string `db:"name"`
+	Birthday     string `db:"birthday"`
+	Sex          string `db:"sex"`
+	IdentifyCard string `db:"identify_card"`
+	Mobile       string `db:"mobile"`
+	Photo        string `db:"photo"`
+	CreatedAt    int64  `db:"created_at"`
+	UpdatedAt    int64  `db:"updated_at"`
+}
+
+
+func UserInsert(u *User) (int64,error){
+  query, err := DB.Prepare(fmt.Sprintf("INSERT INTO %s%s (`id`,`name`,`birthday`,`sex`,`identify_card`,`mobile`,`photo`,`created_at`,`updated_at`) VALUES (?,?,?,?,?,?,?,?,?)",prefix,tblUsers))
+  if err != nil {
+	  return 0, err
+  }
+
+  ret, err := query.Exec(u.Id,u.Name,u.Birthday,u.Sex,u.IdentifyCard,u.Mobile,u.Photo,u.CreatedAt,u.UpdatedAt)
+  if err != nil {
+	  return 0, err
+  }
+
+  return ret.RowsAffected()
+}
 
 // func DoInsert() {
 // 	db,err := sql.Open("mysql","root:123456@tcp(localhost:3306)/home?charset=latin1")
@@ -17,18 +48,6 @@ package model
 // 	if err != nil {
 // 		panic(err.Error())
 // 	}
-
-// 	// name := "chenyichao"
-// 	// birthday := "1981-02-13"
-// 	// sex := "m"
-// 	// identity_card := "310226198102132017"
-// 	// mobile := "18221659878"
-	
-// 	name1 := "panjia"
-// 	birthday1 := "1981-02-06"
-// 	sex1 := "m"
-// 	identity_card1 := "310226198102062021"
-//     mobile1 := "13482844330"
 
 // 	res,err := stmt.Exec(name1,birthday1,sex1,identity_card1,mobile1)
 

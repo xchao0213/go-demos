@@ -7,17 +7,16 @@ import (
 
 func GetDataSource() (string) {
 	err := godotenv.Load()
-	if err != nil {
-		//log
-	}
-
+	
+	CheckErr(err)
+	
 	username := os.Getenv("USERNAME")
 	password := os.Getenv("PASSWORD")
 	host := os.Getenv("HOST")
 	port := os.Getenv("PORT")
 	database := os.Getenv("DATABASE")
 
-    datasource := username + password + ":" + "@tcp(" + host + port + ")/" + database
+    datasource := username + ":" + password  + "@tcp(" + host + ":" + port + ")/" + database
 	 
     return datasource
 }

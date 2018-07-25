@@ -8,6 +8,7 @@ import (
 func SetupRouter() *gin.Engine {
 	r:= gin.Default();
 
+	r.Static("/images","./uploads")
     //get all
 	r.GET("/user",controller.GetUsers)
 	//get single
